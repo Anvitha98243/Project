@@ -8,10 +8,14 @@ const JWT_SECRET = 'your-secret-key-change-in-production';
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  credentials: true
+}));
 
 // MongoDB Atlas Connection - UPDATED
-mongoose.connect('mongodb+srv://foodshare_user:anvi100@donattion.3tuxx2y.mongodb.net/foodshare?retryWrites=true&w=majority&appName=Donattion', {
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://foodshare_user:anvi100@donattion.3tuxx2y.mongodb.net/foodshare?retryWrites=true&w=majority&appName=Donattion';
+mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API_URL from '../config';
 
 function OrphanageDashboard({ token, user }) {
   const [activeTab, setActiveTab] = useState('donations');
@@ -28,7 +29,7 @@ function OrphanageDashboard({ token, user }) {
   const fetchDonations = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/donations', {
+      const response = await fetch(`${API_URL}/api/donations`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await response.json();
@@ -42,7 +43,7 @@ function OrphanageDashboard({ token, user }) {
   const fetchMyRequests = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/requests/my', {
+      const response = await fetch(`${API_URL}/api/requests/my`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await response.json();
@@ -56,7 +57,7 @@ function OrphanageDashboard({ token, user }) {
   const fetchNotifications = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/notifications', {
+      const response = await fetch(`${API_URL}/api/notifications`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await response.json();
@@ -73,7 +74,7 @@ function OrphanageDashboard({ token, user }) {
     setMessage('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/requests', {
+      const response = await fetch(`${API_URL}/api/requests`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -102,7 +103,7 @@ function OrphanageDashboard({ token, user }) {
 
   const handleAcceptDonation = async (donationId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/donations/${donationId}/accept`, {
+      const response = await fetch(`${API_URL}/api/donations/${donationId}/accept`, {
         method: 'PUT',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -118,7 +119,7 @@ function OrphanageDashboard({ token, user }) {
 
   const markAsRead = async (notificationId) => {
     try {
-      await fetch(`http://localhost:5000/api/notifications/${notificationId}/read`, {
+      await fetch(`${API_URL}/api/notifications/${notificationId}/read`, {
         method: 'PUT',
         headers: { 'Authorization': `Bearer ${token}` }
       });

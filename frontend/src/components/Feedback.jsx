@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API_URL from '../config';
 
 function Feedback({ token, user }) {
   const [activeTab, setActiveTab] = useState('submit');
@@ -22,7 +23,7 @@ function Feedback({ token, user }) {
   const fetchAllFeedback = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/feedback');
+      const response = await fetch(`${API_URL}/api/feedback`);
       const data = await response.json();
       setAllFeedback(data);
     } catch (error) {
@@ -34,7 +35,7 @@ function Feedback({ token, user }) {
   const fetchMyFeedback = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/feedback/my', {
+      const response = await fetch(`${API_URL}/api/feedback/my`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await response.json();
@@ -51,7 +52,7 @@ function Feedback({ token, user }) {
     setMessage('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/feedback', {
+      const response = await fetch(`${API_URL}/api/feedback`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -9,7 +9,7 @@ import DonorDashboard from './components/DonorDashboard';
 import OrphanageDashboard from './components/OrphanageDashboard';
 import Profile from './components/Profile';
 import Feedback from './components/Feedback';
-
+import API_URL from './config';
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [user, setUser] = useState(null);
@@ -23,7 +23,7 @@ function App() {
 
   const fetchProfile = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/auth/profile', {
+      const response = await fetch(`${API_URL}/api/auth/profile`,  {
         headers: {
           'Authorization': `Bearer ${token}`
         }

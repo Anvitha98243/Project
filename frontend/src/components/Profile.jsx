@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API_URL from '../config';
 
 function Profile({ token, user, onUpdateUser }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -24,7 +25,7 @@ function Profile({ token, user, onUpdateUser }) {
     setMessage('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/profile', {
+      const response = await fetch(`${API_URL}/api/auth/profile`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

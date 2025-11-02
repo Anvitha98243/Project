@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API_URL from '../config';
 
 function DonorDashboard({ token, user }) {
   const [activeTab, setActiveTab] = useState('create-donation');
@@ -29,7 +30,7 @@ function DonorDashboard({ token, user }) {
   const fetchMyDonations = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/donations/my', {
+      const response = await fetch(`${API_URL}/api/donations/my`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await response.json();
@@ -43,7 +44,7 @@ function DonorDashboard({ token, user }) {
   const fetchRequests = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/requests', {
+      const response = await fetch(`${API_URL}/api/requests`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await response.json();
@@ -57,7 +58,7 @@ function DonorDashboard({ token, user }) {
   const fetchNotifications = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/notifications', {
+      const response = await fetch(`${API_URL}/api/notifications`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await response.json();
@@ -74,7 +75,7 @@ function DonorDashboard({ token, user }) {
     setMessage('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/donations', {
+      const response = await fetch(`${API_URL}/api/donations`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -104,7 +105,7 @@ function DonorDashboard({ token, user }) {
 
   const handleFulfillRequest = async (requestId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/requests/${requestId}/fulfill`, {
+      const response = await fetch(`${API_URL}/api/requests/${requestId}/fulfill`, {
         method: 'PUT',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -120,7 +121,7 @@ function DonorDashboard({ token, user }) {
 
   const markAsRead = async (notificationId) => {
     try {
-      await fetch(`http://localhost:5000/api/notifications/${notificationId}/read`, {
+      const response = await fetch(`${API_URL}/api/notifications/${notificationId}/read`, {
         method: 'PUT',
         headers: { 'Authorization': `Bearer ${token}` }
       });
